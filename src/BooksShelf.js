@@ -1,11 +1,22 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import * as BooksApi from './BooksAPI'
 import Shelf from './Shelf'
 
 class BooksShelf extends Component {
+  static propTypes = {
+    books:PropTypes.array.isRequired
+  }
+
   state = {
     books:[]
+  }
+  
+  componentWillReceiveProps(nextProps){
+    const {books} = nextProps
+    
+    this.setState({ books })
   }
 
   handleShelfUpdate = (book, shelf) => {
@@ -26,12 +37,6 @@ class BooksShelf extends Component {
         })
       )
     })
-  }
-
-  componentDidMount() {
-    BooksApi.getAll().then(( books ) => {
-      this.setState({ books })
-    })    
   }
   
   render(){
