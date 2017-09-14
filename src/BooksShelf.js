@@ -5,46 +5,32 @@ import Shelf from './Shelf'
 
 class BooksShelf extends Component {
   state = {
-    currentlyReading:[],
-    read:[],
-    wantToRead:[]
+    books:[]
   }
+
   handleShelfUpdate = (book, shelf) => {
     
+    /**
+     * change book shelf
+     */
+    book.shelf = shelf
+    /**
+     * Update book shelf using the API
+     */
     BooksApi.update(book, shelf).then(b => {
-      console.log(b)
-      console.log(book)
-      console.log(shelf)
-      // this.setState({
-      //   currentlyReading: b.currentlyReading,
-      //   read:b.read,
-      //   wantToRead: b.wantToRead
-      // })
-      if(b.currentlyReading.includes(book.id)){
-        this.setState((prevState) => ({
-          currentlyReading:prevState.currentlyReading.push(book)
-        }))
-      }
-      if(b.read.includes(book.id)){
-        this.setState((prevState) => ({
-          read:prevState.read.push(book)
-        }))
-      }
-      if(b.wantToRead.includes(book.id)){
-        this.setState((prevState) => ({
-          wantToRead:prevState.wantToRead.push(book)
-        }))
-      }
-
+      /**
+       * Update the state removing the book from the previous shelf using filter and place it in the array with concat
+       */
+      this.setState( prevState => ({
+          books:prevState.books.filter(b => b.id !== book.id).concat([book])
+        })
+      )
     })
   }
+
   componentDidMount() {
     BooksApi.getAll().then(( books ) => {
-      this.setState({
-        currentlyReading: books.filter(b => b.shelf === 'currentlyReading'),
-        read: books.filter(b => b.shelf === 'read'),
-        wantToRead: books.filter(b => b.shelf === 'wantToRead')
-      })
+      this.setState({ books })
     })    
   }
   
@@ -56,9 +42,9 @@ class BooksShelf extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <Shelf shelfTitle="Currently Reading" books={this.state.currentlyReading} shelfUpdate={this.handleShelfUpdate}/>
-            <Shelf shelfTitle="Read" books={this.state.read} shelfUpdate={this.handleShelfUpdate}/>
-            <Shelf shelfTitle="Want to Read" books={this.state.wantToRead} shelfUpdate={this.handleShelfUpdate}/>
+            <Shelf shelfTitle="Currently Reading" books={this.state.books.filter(b => b.shelf === 'currentlyReading')} shelfUpdate={this.handleShelfUpdate} />
+            <Shelf shelfTitle="Read" books={this.state.books.filter(b => b.shelf === 'read')} shelfUpdate={this.handleShelfUpdate}/>
+            <Shelf shelfTitle="Want to Read" books={this.state.books.filter(b => b.shelf === 'wantToRead')} shelfUpdate={this.handleShelfUpdate}/>
           </div>
         </div>
         <div className="open-search">
