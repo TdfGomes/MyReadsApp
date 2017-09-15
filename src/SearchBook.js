@@ -10,13 +10,29 @@ class SearchBook extends Component {
   }
 
   state = {
-    query:''
+    query:'',
+    searchedBooks:[]
   }
   
   updateQuery = (query) => {
     this.setState({ query })
+
+    this.bookSearch(this.state.query)
+  }
+  
+  bookSearch = (query) => {
     
-    BooksAPI.search(query,50).then(books => console.log(books))
+    BooksAPI.search(query, 50).then(searchedBooks => {
+      this.setState({ searchedBooks })
+      this.clearBooks(query)
+    })
+  
+  }
+  
+  clearBooks = (query) => {
+    if (query === '') {
+      this.setState({ searchedBooks: [] })
+    }
   }
 
   render(){

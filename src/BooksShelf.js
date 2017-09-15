@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import * as BooksApi from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import Shelf from './Shelf'
 
 class BooksShelf extends Component {
@@ -28,7 +28,7 @@ class BooksShelf extends Component {
     /**
      * Update book shelf using the API
      */
-    BooksApi.update(book, shelf).then(b => {
+    BooksAPI.update(book, shelf).then(b => {
       /**
        * Update the state removing the book from the previous shelf using filter and place it in the array with concat
        */

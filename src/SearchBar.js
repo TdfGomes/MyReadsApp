@@ -11,7 +11,7 @@ class SearchBar extends Component {
   }
   
   handleOnChange = (e) => {
-    const query = e.target.value
+    const query = e.target.value.trim()
     
     this.props.serachTerm(query)
     this.setState({ query })
