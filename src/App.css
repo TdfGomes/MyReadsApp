@@ -84,6 +84,19 @@ body, .app {
   border: none;
   outline: none;
 }
+.search-books-bar button {
+  overflow:hidden;
+  border:none;
+  cursor:pointer;
+}
+.search-books-bar button > div{
+  padding:20px;
+  background-image: url('./icons/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30px;
+  transform:rotate(45deg)
+}
 
 .close-search {
   display: block;
