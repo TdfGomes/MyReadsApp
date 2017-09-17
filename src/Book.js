@@ -12,7 +12,7 @@ class Book extends Component{
     book: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
     imageLinks: PropTypes.object.isRequired,
-    onUpdate: PropTypes.func,
+    onUpdate: PropTypes.func.isRequired,
     shelf: PropTypes.string,
     title: PropTypes.string.isRequired
   }

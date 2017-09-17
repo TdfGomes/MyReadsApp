@@ -16,16 +16,35 @@ class App extends Component {
     })
   }
   
+  handleShelfUpdate = (book, shelf) => {
+
+    /**
+     * change book shelf
+     */
+    book.shelf = shelf
+    /**
+     * Update book shelf using the API
+     */
+    BooksAPI.update(book, shelf).then(b => {
+      /**
+       * Update the state removing the book from the previous shelf using filter and place it in the array with concat
+       */
+      this.setState(prevState => ({
+        books: prevState.books.filter(b => b.id !== book.id).concat([book])
+      })
+      )
+    })
+  }
     
   render(){
     return(
       <div className="app">
         <Route exact path="/" render={ () => (
-          <BooksShelf books={this.state.books}/>
+          <BooksShelf books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
         )
         }/>
         <Route path="/search" render={() =>( 
-          <SearchBook books={this.state.books}/>
+          <SearchBook books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
           )
         }/>
       </div>

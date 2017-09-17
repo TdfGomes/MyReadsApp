@@ -8,7 +8,7 @@ class Select extends Component{
 
   static propTypes = {
     onSelect: PropTypes.func.isRequired,
-    shelfValue: PropTypes.string.isRequired
+    shelfValue: PropTypes.string
   }
 
   handleOnSelect = ( book, e ) => {

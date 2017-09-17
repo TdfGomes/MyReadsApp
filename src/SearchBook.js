@@ -6,7 +6,8 @@ import Book from './Book'
 
 class SearchBook extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    updadeShelf: PropTypes.func.isRequired
   }
 
   state = {
@@ -22,9 +23,19 @@ class SearchBook extends Component {
   }
   
   bookSearch = (query) => {  
-    if(query.length >= 3){
+    if(query.length >= 2){
       BooksAPI.search(query, 50).then(searchedBooks => {
         this.setState({ searchedBooks })
+        this.state.searchedBooks.forEach(sb => {
+          this.props.books.forEach(b => {
+            if(sb.id === b.id){
+              console.log(b)
+            }
+            else{
+              console.log('not found')
+            }
+          })
+        })
       })
     }
   }
@@ -35,7 +46,9 @@ class SearchBook extends Component {
       searchedBooks:[]
     })
   }
-
+  handleShelfUpdate = (book, shelf) => {
+    this.props.updadeShelf(book, shelf)
+  }
   render(){
     return(
       <div className="search-books">
@@ -45,17 +58,20 @@ class SearchBook extends Component {
             {
               ! this.state.searchedBooks
               ? <li><h1>Loading...</h1></li>
-              : this.state.searchedBooks.map(book => (
-                  <li key={book.id}>
-                    <Book
-                      authors={book.authors}
-                      book={book}
-                      id={book.id}
-                      imageLinks={book.imageLinks}
-                      title={book.title}
-                    />
-                  </li>
-                )  
+              : this.state.searchedBooks.map((book, i) => {
+                  return(
+                    <li key={book.id}>
+                      <Book
+                        authors={book.authors}
+                        book={book}
+                        id={book.id}
+                        imageLinks={book.imageLinks}
+                        onUpdate={this.handleShelfUpdate}
+                        title={book.title}
+                      />
+                    </li>
+                  )
+                } 
               )
             }
           </ol>
