@@ -15,6 +15,10 @@ class SearchBook extends Component {
     searchedBooks:[]
   }
   
+  handleShelfUpdate = (book, shelf) => {
+    this.props.updadeShelf(book, shelf)
+  }
+
   updateQuery = (query) => {
     this.setState({ query })
 
@@ -26,16 +30,6 @@ class SearchBook extends Component {
     if(query.length >= 2){
       BooksAPI.search(query, 50).then(searchedBooks => {
         this.setState({ searchedBooks })
-        this.state.searchedBooks.forEach(sb => {
-          this.props.books.forEach(b => {
-            if(sb.id === b.id){
-              console.log(b)
-            }
-            else{
-              console.log('not found')
-            }
-          })
-        })
       })
     }
   }
@@ -46,9 +40,7 @@ class SearchBook extends Component {
       searchedBooks:[]
     })
   }
-  handleShelfUpdate = (book, shelf) => {
-    this.props.updadeShelf(book, shelf)
-  }
+  
   render(){
     return(
       <div className="search-books">
@@ -59,6 +51,12 @@ class SearchBook extends Component {
               ! this.state.searchedBooks
               ? <li><h1>Loading...</h1></li>
               : this.state.searchedBooks.map((book, i) => {
+                  this.props.books.forEach(b => {
+                    if (book.id === b.id) {
+                      book.shelf = b.shelf
+                    }
+                  })
+                  
                   return(
                     <li key={book.id}>
                       <Book
@@ -67,6 +65,7 @@ class SearchBook extends Component {
                         id={book.id}
                         imageLinks={book.imageLinks}
                         onUpdate={this.handleShelfUpdate}
+                        shelf={book.shelf ? book.shelf : 'none'}
                         title={book.title}
                       />
                     </li>
