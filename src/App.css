@@ -23,7 +23,9 @@ body, .app {
 
 .list-books-content {
   padding: 0 0 80px;
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .bookshelf {
@@ -58,7 +60,8 @@ body, .app {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 28px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
 }
 
@@ -70,11 +73,16 @@ body, .app {
   top: 0;
   left: 0;
   z-index: 5;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
+  -webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
 }
 .search-books-input-wrapper {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   background: #e9e;
 }
 .search-books-bar input {
@@ -84,18 +92,23 @@ body, .app {
   border: none;
   outline: none;
 }
-.search-books-bar button {
+button.close {
   overflow:hidden;
   border:none;
   cursor:pointer;
+  background: none;
 }
-.search-books-bar button > div{
+button.close > div{
   padding:20px;
-  background-image: url('./icons/add.svg');
+  background-image: url('./icons/remove.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 30px;
+  background-size: 40px;
+  -webkit-transform:rotate(45deg);
   transform:rotate(45deg)
+}
+button.close.dark > div{
+  background-image: url('./icons/remove-dark.svg');
 }
 
 .close-search {
@@ -115,7 +128,62 @@ body, .app {
 .search-books-results {
   padding: 80px 10px 20px;
 }
-
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(241, 239, 239, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+}
+.overlay.fade-in{
+  opacity: 1;
+  visibility: visible;
+}
+.overlay.fade-out{
+  opacity: 0;
+  visibility: hidden;
+}
+.modal-update {
+  width: 55%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background-color: rgba(96, 172, 93, 0.92);
+  -webkit-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+  pointer-events: none;
+}
+.modal-update .modal-content{
+  padding:15px;
+  text-align: center;
+  color:#dedede;
+}
+.modal-content h1{
+  font-weight: 100;
+}
+.button-wrapper{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.modal-update.fade-in {
+  -webkit-animation: show 750ms cubic-bezier(0.35, 0.93, 0.42, 1.32);
+          animation: show 750ms cubic-bezier(0.35, 0.93, 0.42, 1.32);
+  pointer-events: all;
+}
+.modal-update.fade-out {
+  -webkit-animation: hide 750ms cubic-bezier(0.35, 0.93, 0.42, 1.32);
+          animation: hide 750ms cubic-bezier(0.35, 0.93, 0.42, 1.32);
+  pointer-events: none;
+}
 /* books grid */
 
 .books-grid {
@@ -123,9 +191,16 @@ body, .app {
   padding: 0;
   margin: 0;
 
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 .books-grid li {
   padding: 10px 15px;
@@ -149,8 +224,12 @@ body, .app {
 .book-top {
   position: relative;
   height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .book-shelf-changer {
@@ -165,7 +244,8 @@ body, .app {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .book-shelf-changer select {
   width: 100%;
@@ -177,7 +257,8 @@ body, .app {
 /* book cover */
 
 .book-cover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
 }
 .book-cover-title {
@@ -185,3 +266,74 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+
+
+/*=============================================
+=            Modal Animation            =
+=============================================*/
+
+@-webkit-keyframes show{
+  from{
+    opacity:0;
+    visibility: hidden;
+    -webkit-transform: translate(-50%, -300%);
+            transform: translate(-50%, -300%)
+  }
+  to{
+    opacity:1;
+    visibility: visible;
+    -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+  }
+}
+
+@keyframes show{
+  from{
+    opacity:0;
+    visibility: hidden;
+    -webkit-transform: translate(-50%, -300%);
+            transform: translate(-50%, -300%);
+  }
+  to{
+    opacity:1;
+    visibility: visible;
+    -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+  }
+}
+
+
+@-webkit-keyframes hide{
+  from{
+    opacity:1;
+    visibility: visible;
+    -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+  }
+  to{
+    opacity:0;
+    visibility: hidden;
+    -webkit-transform: translate(-50%, -300%);
+            transform: translate(-50%, -300%);
+  }
+}
+
+
+@keyframes hide{
+  from{
+    opacity:1;
+    visibility: visible;
+    -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+  }
+  to{
+    opacity:0;
+    visibility: hidden;
+    -webkit-transform: translate(-50%, -300%);
+            transform: translate(-50%, -300%);
+  }
+}
+
+/*=====  End of Modal Animation  ======*/
+

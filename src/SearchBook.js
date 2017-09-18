@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import * as BooksAPI from './BooksAPI'
 import SearchBar from './SearchBar'
 import Book from './Book'
+import Modal from './Modal'
 
 class SearchBook extends Component {
   static propTypes = {
@@ -12,18 +13,23 @@ class SearchBook extends Component {
 
   state = {
     query:'',
-    searchedBooks:[]
+    searchedBooks:[],
+    updatedBook:'',
+    updatedShelf:'',
   }
   
   handleShelfUpdate = (book, shelf) => {
     this.props.updadeShelf(book, shelf)
+
+    this.setState({
+      updatedBook:book.title,
+      updatedShelf:shelf
+    })
   }
 
   updateQuery = (query) => {
     this.setState({ query })
-
     this.bookSearch(this.state.query)
-    
   }
   
   bookSearch = (query) => {  
@@ -37,10 +43,22 @@ class SearchBook extends Component {
   clearBooks = () => {
     this.setState({
       query:'',
-      searchedBooks:[]
+      searchedBooks:[],
+      updatedBook:'',
+      updatedShelf:''
     })
   }
   
+  removeModal = () => {
+    setTimeout(() => {
+      this.setState({
+        updatedBook:'',
+        updadeShelf:''
+      })
+    },750)
+    console.log('remove')
+  }
+
   render(){
     return(
       <div className="search-books">
@@ -75,6 +93,11 @@ class SearchBook extends Component {
             }
           </ol>
         </div>
+        {
+          this.state.updatedBook && (
+            <Modal updatedBook={this.state.updatedBook} updatedShelf={this.state.updatedShelf} removeModal={this.removeModal}/>
+          )
+        }
       </div>
     )
   }

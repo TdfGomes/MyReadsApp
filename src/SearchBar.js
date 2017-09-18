@@ -24,8 +24,6 @@ class SearchBar extends Component {
     this.props.clearBooks()
   }
 
-
-
   render(){
     return(
       <div className="search-books-bar">
@@ -33,8 +31,8 @@ class SearchBar extends Component {
           <div className="search-books-input-wrapper">
             <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={this.handleOnChange}/>
           </div>
-          <button className="clear-books-list" onClick={this.handleOnClick}>
-            <div className="clear-icon"></div>
+          <button className="close dark" onClick={this.handleOnClick}>
+            <div className="remove-icon"></div>
           </button>
         </div>
     )
