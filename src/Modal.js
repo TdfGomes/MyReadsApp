@@ -4,12 +4,13 @@ import Proptypes from 'prop-types'
 class Modal extends Component{
   static propTypes = {
     updatedBook: Proptypes.string.isRequired,
-    updatedShelf: Proptypes.string.isRequired
+    updatedShelf: Proptypes.string.isRequired,
+    removeModal: Proptypes.func.isRequired
   }
   
   state = {
     fadeIn:'',
-    fadeOut:''
+    fadeOut:'',
   }
 
   componentWillMount() {
@@ -35,7 +36,7 @@ class Modal extends Component{
             </button>
           </div>
           <div className="modal-content">
-            <h1>You add <b>{this.props.updatedBook}</b> to your <b>{this.props.updatedShelf}</b> shelf</h1>
+            <h1>You add <b>{this.props.updatedBook}</b> to your <b className="shelf">{this.props.updatedShelf.replace(/[A-Z]/g, ' $&')}</b> shelf</h1>
           </div>
         </div>
       </div>

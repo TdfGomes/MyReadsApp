@@ -56,7 +56,6 @@ class SearchBook extends Component {
         updadeShelf:''
       })
     },750)
-    console.log('remove')
   }
 
   render(){

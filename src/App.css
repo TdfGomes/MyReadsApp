@@ -169,6 +169,9 @@ button.close.dark > div{
 .modal-content h1{
   font-weight: 100;
 }
+.modal-content .shelf{
+  text-transform: capitalize;
+}
 .button-wrapper{
   position: absolute;
   top: 0;
