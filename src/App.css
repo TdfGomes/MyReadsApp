@@ -210,6 +210,9 @@ button.close.dark > div{
   text-align: left;
 }
 
+.books-grid li a{
+  text-decoration: none;
+}
 .book {
   width: 140px;
 }
@@ -217,13 +220,25 @@ button.close.dark > div{
 .book-authors {
   font-size: 0.8em;
 }
+.book a{
+  -webkit-transition: color 350ms ease-in-out;
+  transition: color 350ms ease-in-out;  
+  cursor: pointer;
+}
 .book-title {
   margin-top: 10px;
+  color:#000;
 }
 .book-authors {
   color: #999;
 }
+.book a:hover .book-title,
+.book a:hover .book-authors{
+  color:#2e7d32;
+  text-decoration: underline;
+}
 
+  
 .book-top {
   position: relative;
   height: 200px;
@@ -235,10 +250,9 @@ button.close.dark > div{
           align-items: flex-end;
 }
 
-.book-shelf-changer {
+.book-shelf-changer,
+.single-book-shelf-changer{
   position: absolute;
-  right: 0;
-  bottom: -10px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -248,9 +262,19 @@ button.close.dark > div{
   background-position: center;
   background-size: 20px;
   -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-          box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-.book-shelf-changer select {
+.book-shelf-changer{
+  right: 0;
+  bottom: -10px;
+}
+.single-book-shelf-changer{
+  position: relative;
+  bottom: 0;
+  left: 0;
+}
+.book-shelf-changer select,
+.single-book-shelf-changer select {
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -269,6 +293,60 @@ button.close.dark > div{
   text-align: center;
   font-size: 0.8em;
 }
+
+/*=============================================
+=            Single Book            =
+=============================================*/
+.single-book-title{
+  margin-top: 0;
+  margin-bottom: 35px;
+  background-color: #2e7d32;
+  color: #dedede;
+  text-align: center;
+  padding:5px 15px;
+  position: relative;
+  
+}
+.single-book-title .close-search {
+  float: left;
+  left: 0;
+  top: 0;
+  background:#2e7d32;
+  background-image: url('./icons/arrow-back-white.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 35px;
+  cursor: pointer;
+}
+.single-book{
+  padding: 0 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  
+}
+.book-img-wraper {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 15%;
+          flex: 0 15%;
+  padding: 0 15px;
+  position: relative;
+}
+.book-img-wraper img{
+  width: 100%;
+  height: auto;
+}
+.book-description {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 75%;
+          flex: 0 75%;
+  padding: 0 15px;
+}
+
+
+/*=====  End of Single Book  ======*/
+
 
 
 

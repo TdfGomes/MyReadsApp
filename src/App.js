@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import SearchBook from './SearchBook'
 import BooksShelf from './BooksShelf'
+import SingleBook from './SingleBook'
 import './App.css'
 
 class App extends Component {
@@ -39,14 +40,19 @@ class App extends Component {
   render(){
     return(
       <div className="app">
-        <Route exact path="/" render={ () => (
-          <BooksShelf books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
-        )
-        }/>
-        <Route path="/search" render={() =>( 
-          <SearchBook books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
+        
+          <Route exact path="/" render={ () => (
+            <BooksShelf books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
           )
-        }/>
+          }/>
+          <Route path="/search" render={() =>( 
+            <SearchBook books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
+            )
+          }/>
+        
+        <Route path="/book/:id" render={(props) => (
+          <SingleBook updadeShelf={this.handleShelfUpdate} {...props}/>
+        )} />
       </div>
     )
   }

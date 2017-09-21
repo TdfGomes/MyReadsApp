@@ -2,13 +2,14 @@ import React, { Component } from  'react'
 import PropTypes from 'prop-types'
 
 class Select extends Component{
-  state = {
-    shelfValue: 'none'
-  }
-
   static propTypes = {
+    className:PropTypes.string.isRequired,
     onSelect: PropTypes.func.isRequired,
     shelfValue: PropTypes.string.isRequired
+  }
+ 
+  state = {
+    shelfValue: 'none',
   }
 
   handleOnSelect = ( book, e ) => {
@@ -25,7 +26,7 @@ class Select extends Component{
   
   render(){
     return(
-      <div className="book-shelf-changer">
+      <div className={this.props.className}>
         <select onChange={ (e) => this.handleOnSelect(this.props.book, e) } value={ this.state.shelfValue }>
           <option value="none" disabled>Move to...</option>
           <option value="currentlyReading">Currently Reading</option>
