@@ -214,16 +214,40 @@ button.close.dark > div{
   text-decoration: none;
 }
 .book {
-  width: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 350px;
+  width: 165px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #f7f7f7;
+  padding:20px 0;
+  border-radius: 5px;
 }
 .book-title,
 .book-authors {
   font-size: 0.8em;
 }
 .book a{
+  display: inline-block;
+  width: 100%;  
+  margin-top: 5px;
+  padding: 0 20px;
+  cursor: pointer;
+  border-top: 1px solid #60ac5d;
   -webkit-transition: color 350ms ease-in-out;
   transition: color 350ms ease-in-out;  
-  cursor: pointer;
 }
 .book-title {
   margin-top: 10px;
@@ -242,6 +266,7 @@ button.close.dark > div{
 .book-top {
   position: relative;
   height: 200px;
+  padding-bottom: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
