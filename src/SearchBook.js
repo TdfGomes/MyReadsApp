@@ -13,6 +13,7 @@ class SearchBook extends Component {
   }
 
   state = {
+    error:false,
     query:'',
     searchedBooks:[],
     updatedBook:'',
@@ -29,14 +30,20 @@ class SearchBook extends Component {
   }
 
   updateQuery = (query) => {
-    this.setState({ query })
-    this.bookSearch( query )
+    this.setState( { query }, 
+      () => this.bookSearch(this.state.query) // call booksearch on query state update
+    )
   }
   
   bookSearch = (query) => {  
     BooksAPI.search(query, 50).then(searchedBooks => {
-      this.setState({ searchedBooks })
-    }).catch(error => console.log(error))
+      if(searchedBooks.error){
+        this.setState({error: true})
+      }
+      else{
+        this.setState({ searchedBooks })
+      }
+    }).catch(error => console.error(error))
   }
   
   clearBooks = () => {
@@ -61,7 +68,9 @@ class SearchBook extends Component {
     const updateQuery = debounce(e => {this.updateQuery(e)}, 450)
     return(
       <div className="search-books">
-        <SearchBar serachTerm={updateQuery} clearBooks={this.clearBooks}/>
+        {this.props.books.length > 0 &&
+          <SearchBar searchTerm={updateQuery} clearBooks={this.clearBooks}/>
+        }
         <div className="search-books-results">
           <ol className="books-grid">
             {

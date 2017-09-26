@@ -10,11 +10,13 @@ const BooksShelf = (props) => {
         <h1>MyReads</h1>
       </div>
       <div className="list-books-content">
-        <div>
-          <Shelf shelfTitle="Currently Reading" books={props.books.filter(b => b.shelf === 'currentlyReading')} shelfUpdate={props.updadeShelf} />
-          <Shelf shelfTitle="Read" books={props.books.filter(b => b.shelf === 'read')} shelfUpdate={props.updadeShelf}/>
-          <Shelf shelfTitle="Want to Read" books={props.books.filter(b => b.shelf === 'wantToRead')} shelfUpdate={props.updadeShelf}/>
-        </div>
+        {props.books.length > 0 &&
+          <div>
+            <Shelf shelfTitle="Currently Reading" books={props.books.filter(b => b.shelf === 'currentlyReading')} shelfUpdate={props.updadeShelf} />
+            <Shelf shelfTitle="Read" books={props.books.filter(b => b.shelf === 'read')} shelfUpdate={props.updadeShelf}/>
+            <Shelf shelfTitle="Want to Read" books={props.books.filter(b => b.shelf === 'wantToRead')} shelfUpdate={props.updadeShelf}/>
+          </div>
+        }
       </div>
       <div className="open-search">
         <Link to='/search'>Add a Book</Link>

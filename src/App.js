@@ -43,22 +43,18 @@ class App extends Component {
     return(
       <div className="app">
         <Switch>
-          { books.length > 0 &&
-            <Route exact path="/" render={ () => (
-              <BooksShelf books={ books } updadeShelf={this.handleShelfUpdate}/>
+          <Route exact path="/" render={ () => (
+            <BooksShelf books={ books } updadeShelf={this.handleShelfUpdate}/>
+          )
+          }/>          
+          <Route path="/search" render={() =>( 
+            <SearchBook books={ books } updadeShelf={this.handleShelfUpdate}/>
             )
-            }/>
-          }
-          { books.length > 0 &&
-            <Route path="/search" render={() =>( 
-              <SearchBook books={ books } updadeShelf={this.handleShelfUpdate}/>
-              )
-            }/>
-          }
+          }/>
           <Route path="/book/:id" render={(props) => (
             <SingleBook updadeShelf={this.handleShelfUpdate} {...props}/>
           )} />
-          {/* <Route render={() => <h1 style={{textAlign:'center',marginTop:'35px'}}>Not Found!!</h1>}/> */}
+          <Route render={() => <h1 style={{textAlign:'center',marginTop:'35px'}}>Not Found!!</h1>}/>
         </Switch>
       </div>
     )

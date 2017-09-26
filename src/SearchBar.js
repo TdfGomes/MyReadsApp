@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 class SearchBar extends Component {
   static propTypes = {
-    serachTerm: PropTypes.func.isRequired,
+    searchTerm: PropTypes.func.isRequired,
     clearBooks: PropTypes.func
   }
 
@@ -14,13 +14,16 @@ class SearchBar extends Component {
   
   handleOnChange = (e) => {
     const query = e.target.value.trim()
-    this.props.serachTerm(query)
-    this.setState({ query })
+    
+    this.setState({ query },
+      () => this.props.searchTerm(query)
+    )
   }
 
   handleOnClick = () => {
-    this.setState({query:''})
-    this.props.clearBooks()
+    this.setState( { query:'' },
+      () => this.props.clearBooks()
+    )
   }
 
   render(){
