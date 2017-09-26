@@ -42,6 +42,7 @@ class SingleBook extends Component {
   }
   
   render(){
+    const noCover = 'http://via.placeholder.com/128x193?text=No%20Cover'
     return(
       this.state.book && (
         <div>
@@ -51,7 +52,7 @@ class SingleBook extends Component {
           </h1>
           <div className="single-book">
             <div className="book-img-wraper">
-              <img alt={this.state.book.title} width="128" height="193" src={this.state.book.imageLinks.thumbnail}/>
+              <img alt={this.state.book.title} width="128" height="193" src={ this.state.book.imageLinks ? this.state.book.imageLinks.thumbnail : noCover }/>
               <Select
                 book={this.state.book}
                 className="single-book-shelf-changer"

@@ -12,7 +12,7 @@ class Book extends Component{
     authors: PropTypes.array.isRequired,
     book: PropTypes.object.isRequired,
     id: PropTypes.string.isRequired,
-    imageLinks: PropTypes.object.isRequired,
+    imageLinks: PropTypes.object,
     onUpdate: PropTypes.func.isRequired,
     shelf: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired
@@ -30,12 +30,13 @@ class Book extends Component{
   
   render(){
     const { authors, id,imageLinks, title } = this.props
+    const noCover = 'http://via.placeholder.com/128x193?text=No%20Cover'
     const style = {
       width: 128,
       height: 193,
-      backgroundImage: `url(${imageLinks.thumbnail})`
+      backgroundImage: `url(${imageLinks ? imageLinks.thumbnail : noCover })`
     }
-    // const url = title.replace(/\W/g,'-').toLowerCase()
+    
     return(
 
       <div>
