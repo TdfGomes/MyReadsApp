@@ -1,5 +1,6 @@
 import React , { Component } from 'react'
 import PropTypes from 'prop-types'
+import debounce from 'lodash.debounce'
 import * as BooksAPI from './BooksAPI'
 import SearchBar from './SearchBar'
 import Book from './Book'
@@ -29,15 +30,13 @@ class SearchBook extends Component {
 
   updateQuery = (query) => {
     this.setState({ query })
-    this.bookSearch(this.state.query)
+    this.bookSearch( query )
   }
   
   bookSearch = (query) => {  
-    if(query.length >= 2){
-      BooksAPI.search(query, 50).then(searchedBooks => {
-        this.setState({ searchedBooks })
-      })
-    }
+    BooksAPI.search(query, 50).then(searchedBooks => {
+      this.setState({ searchedBooks })
+    }).catch(error => console.log(error))
   }
   
   clearBooks = () => {
@@ -59,9 +58,10 @@ class SearchBook extends Component {
   }
 
   render(){
+    const updateQuery = debounce(e => {this.updateQuery(e)}, 450)
     return(
       <div className="search-books">
-        <SearchBar serachTerm={this.updateQuery} clearBooks={this.clearBooks}/>
+        <SearchBar serachTerm={updateQuery} clearBooks={this.clearBooks}/>
         <div className="search-books-results">
           <ol className="books-grid">
             {

@@ -14,7 +14,6 @@ class SearchBar extends Component {
   
   handleOnChange = (e) => {
     const query = e.target.value.trim()
-    
     this.props.serachTerm(query)
     this.setState({ query })
   }
@@ -29,7 +28,7 @@ class SearchBar extends Component {
       <div className="search-books-bar">
           <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
-            <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={this.handleOnChange}/>
+            <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={this.handleOnChange}/> 
           </div>
           <button className="close dark" onClick={this.handleOnClick}>
             <div className="remove-icon"></div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import SearchBook from './SearchBook'
 import BooksShelf from './BooksShelf'
@@ -38,21 +38,28 @@ class App extends Component {
   }
     
   render(){
+    const { books } = this.state
+    
     return(
       <div className="app">
-        
-          <Route exact path="/" render={ () => (
-            <BooksShelf books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
-          )
-          }/>
-          <Route path="/search" render={() =>( 
-            <SearchBook books={this.state.books} updadeShelf={this.handleShelfUpdate}/>
+        <Switch>
+          { books.length > 0 &&
+            <Route exact path="/" render={ () => (
+              <BooksShelf books={ books } updadeShelf={this.handleShelfUpdate}/>
             )
-          }/>
-        
-        <Route path="/book/:id" render={(props) => (
-          <SingleBook updadeShelf={this.handleShelfUpdate} {...props}/>
-        )} />
+            }/>
+          }
+          { books.length > 0 &&
+            <Route path="/search" render={() =>( 
+              <SearchBook books={ books } updadeShelf={this.handleShelfUpdate}/>
+              )
+            }/>
+          }
+          <Route path="/book/:id" render={(props) => (
+            <SingleBook updadeShelf={this.handleShelfUpdate} {...props}/>
+          )} />
+          {/* <Route render={() => <h1 style={{textAlign:'center',marginTop:'35px'}}>Not Found!!</h1>}/> */}
+        </Switch>
       </div>
     )
   }
